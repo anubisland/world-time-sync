@@ -1,0 +1,28 @@
+{
+  "name": "توقيت العالم | World Time Sync - AnubisLand",
+  "short_name": "توقيت العالم",
+  "description": "تطبيق ويب ذكي (PWA) لتحويل وتنسيق التوقيت بين مدن العالم ومقارنة ساعات العمل والاجتماعات بدقة - من AnubisLand",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "dir": "rtl",
+  "lang": "ar",
+  "theme_color": "#064e3b",
+  "background_color": "#f4f7fb",
+  "categories": ["utilities", "productivity", "travel"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

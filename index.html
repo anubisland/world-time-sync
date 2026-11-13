@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>توقيت العالم الذكي | World Time Sync • AnubisLand</title>
+  <meta name="description" content="تطبيق ويب ذكي (PWA) لتحويل وتنسيق التوقيت بين مدن العالم ومقارنة ساعات العمل والاجتماعات بدقة - من شركة AnubisLand." />
+  <meta name="theme-color" content="#064e3b" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="توقيت العالم" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Cairo:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@500;700;800&family=Readex+Pro:wght@400;600;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top-header">
+    <div class="container header-inner">
+      <div class="brand-box">
+        <img src="icons/icon-192.png" alt="World Time Sync Logo" class="brand-logo-img" />
+        <div class="brand-text">
+          <h1 data-i18n="appTitle">توقيت العالم الذكي</h1>
+          <span data-i18n="brandSub">منسّق المناطق الزمنية العالمي • AnubisLand</span>
+        </div>
+      </div>
+
+      <nav class="nav-pills" aria-label="Main Navigation">
+        <button type="button" class="nav-pill active" data-view="converter" data-i18n="navConverter">محوّل التوقيت</button>
+        <button type="button" class="nav-pill" data-view="planner" data-i18n="navPlanner">مخطط الاجتماعات (24 ساعة)</button>
+      </nav>
+
+      <div class="header-actions">
+        <button id="btnInstallPWA" class="btn-primary hidden" type="button">
+          <span>📲</span> <span data-i18n="installBtn">تثبيت التطبيق</span>
+        </button>
+        <select id="fontSelect" class="header-select" aria-label="Font Family">
+          <option value="'Cairo', sans-serif" data-i18n="fontCairo">خط: Cairo (كايرو)</option>
+          <option value="'Tajawal', sans-serif" data-i18n="fontTajawal">خط: Tajawal (تجول)</option>
+          <option value="'Almarai', sans-serif" data-i18n="fontAlmarai">خط: Almarai (المراعي)</option>
+          <option value="'Readex Pro', sans-serif" data-i18n="fontReadex">خط: Readex Pro</option>
+        </select>
+        <select id="fontSizeSelect" class="header-select" aria-label="Font Size">
+          <option value="14px" data-i18n="sizeSm">حجم: صغير</option>
+          <option value="16px" selected data-i18n="sizeMd">حجم: متوسط</option>
+          <option value="18px" data-i18n="sizeLg">حجم: كبير</option>
+          <option value="20px" data-i18n="sizeXl">حجم: كبير جداً</option>
+        </select>
+        <button id="btnLang" class="btn-icon" type="button">🌐 EN</button>
+        <button id="btnTheme" class="btn-icon" type="button">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Top Mode & Action Toolbar -->
+    <div class="toolbar-strip">
+      <div class="mode-switch">
+        <button type="button" id="btnModeLive" class="mode-btn active" data-i18n="modeLive">⏱️ الوقت المباشر الآن</button>
+        <button type="button" id="btnModeCustom" class="mode-btn" data-i18n="modeCustom">📅 تحديد وقت وتاريخ مخصص</button>
+      </div>
+      <div class="toolbar-right">
+        <button type="button" id="btnToggleFormat" class="btn-secondary">🕒 <span id="formatLabel" data-i18n="format12">12 ساعة (ص/م)</span></button>
+        <button type="button" id="btnCopySummary" class="btn-primary" data-i18n="copySummaryBtn">📋 نسخ ملخص التوقيت</button>
+      </div>
+    </div>
+
+    <!-- Reference / Source City Hero Card -->
+    <section class="ref-hero-card">
+      <div class="ref-top-row">
+        <div class="ref-title-block">
+          <h2 data-i18n="refSectionTitle">📍 المدينة المرجعية (نقطة الانطلاق)</h2>
+          <p data-i18n="refSectionHint">أدخل التوقيت في هذه المدينة ليتم حساب التوقيت فوراً في جميع المدن المختارة</p>
+        </div>
+        <div class="ref-city-switcher">
+          <div class="search-wrap">
+            <input type="text" id="refSearchInput" class="search-input" autocomplete="off" data-i18n-placeholder="changeRefPlaceholder" placeholder="ابحث لتغيير المدينة المرجعية..." />
+            <div id="refSearchDropdown" class="search-dropdown hidden"></div>
+          </div>
+          <button type="button" id="btnUseMyTz" class="btn-glass" data-i18n="useMyTzBtn">🧭 توقيت جهازي</button>
+        </div>
+      </div>
+
+      <div class="ref-main-grid">
+        <div class="ref-city-display">
+          <div class="ref-city-name" id="refCityTitle">🇪🇬 القاهرة، مصر</div>
+          <div class="ref-clock-big" id="refClockBig">--:--</div>
+          <div class="ref-date-line" id="refDateLine">—</div>
+          <div class="ref-badges" id="refBadges"></div>
+        </div>
+
+        <div class="ref-controls-box">
+          <div class="input-pair">
+            <div class="input-group">
+              <label for="refDateInput" data-i18n="dateLabel">التاريخ</label>
+              <input type="date" id="refDateInput" />
+            </div>
+            <div class="input-group">
+              <label for="refTimeInput" data-i18n="timeLabel">الوقت</label>
+              <input type="time" id="refTimeInput" />
+            </div>
+          </div>
+          <div class="slider-box">
+            <div class="slider-header">
+              <span data-i18n="sliderLabel">شريط التمرير الذكي (اسحب لتجربة أي ساعة في اليوم):</span>
+              <button type="button" id="btnResetNow" class="btn-glass" style="padding:3px 9px; font-size:0.75rem;" data-i18n="resetNowBtn">↺ العودة للآن</button>
+            </div>
+            <input type="range" id="timeSlider" class="time-slider" min="0" max="1425" step="15" value="720" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 1: Converter & Colorful Cards -->
+    <section id="view-converter" class="app-view">
+      <div class="add-city-panel">
+        <div class="add-city-row">
+          <div class="search-wrap" style="flex:1;">
+            <input type="text" id="targetSearchInput" class="search-input" autocomplete="off" data-i18n-placeholder="searchCityPlaceholder" placeholder="ابحث باسم المدينة، الدولة، أو المنطقة الزمنية (مثال: لندن، طوكيو، الرياض، +3)..." />
+            <div id="targetSearchDropdown" class="search-dropdown hidden"></div>
+          </div>
+          <button type="button" id="btnClearTargets" class="btn-secondary" data-i18n="clearAllBtn">🗑️ مسح الكل</button>
+        </div>
+
+        <div class="presets-row">
+          <span class="presets-label" data-i18n="presetsLabel">مجموعات جاهزة:</span>
+          <button type="button" class="preset-chip" data-preset="arab" data-i18n="presetArab">🌙 العواصم العربية</button>
+          <button type="button" class="preset-chip" data-preset="finance" data-i18n="presetFinance">💼 عواصم المال</button>
+          <button type="button" class="preset-chip" data-preset="tech" data-i18n="presetTech">💻 مراكز التكنولوجيا</button>
+          <button type="button" class="preset-chip" data-preset="global" data-i18n="presetGlobal">🌐 حول القارات</button>
+        </div>
+      </div>
+
+      <div class="section-head">
+        <h3>
+          <span data-i18n="targetCardsTitle">المدن المقارنة</span>
+          <span class="count-badge" id="targetsCountBadge">0</span>
+        </h3>
+      </div>
+
+      <div id="targetCardsGrid" class="cards-grid"></div>
+      <div id="emptyTargetsBox" class="empty-state hidden" data-i18n="emptyTargets">
+        لم تضف أي مدن للمقارنة بعد. ابحث بالأعلى أو اختر مجموعة جاهزة!
+      </div>
+    </section>
+
+    <!-- VIEW 2: 24-Hour Smart Meeting Planner Matrix -->
+    <section id="view-planner" class="app-view hidden">
+      <div class="planner-card">
+        <h3 data-i18n="plannerTitle">🗓️ مصفوفة التوقيت الذكية (24 ساعة)</h3>
+        <p style="color:var(--text-muted); font-size:0.9rem; margin-top:4px;" data-i18n="plannerSubtitle">
+          اكتشف أفضل وقت للاجتماعات والمكالمات الدولية بلمحة بصر — اضغط على أي عمود لتطبيق التوقيت فوراً
+        </p>
+
+        <div class="planner-legend">
+          <span class="legend-item"><span class="legend-dot dot-work"></span> <span data-i18n="legendWork">ساعات العمل (09:00 – 17:00)</span></span>
+          <span class="legend-item"><span class="legend-dot dot-awake"></span> <span data-i18n="legendAwake">خارج الدوام / يقظة</span></span>
+          <span class="legend-item"><span class="legend-dot dot-sleep"></span> <span data-i18n="legendSleep">وقت النوم (23:00 – 07:00)</span></span>
+          <span class="legend-item"><span class="legend-dot dot-golden"></span> <span data-i18n="legendGolden">✨ وقت ذهبي مشترك (الجميع في العمل)</span></span>
+        </div>
+
+        <div id="goldenHoursBanner" class="golden-banner"></div>
+
+        <div class="matrix-scroll">
+          <table class="matrix-table" id="plannerMatrixTable"></table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <footer class="app-footer">
+    <div class="container">
+      <div class="footer-verse" data-i18n="footerTagline">﴿وَهُوَ الَّذِي جَعَلَ اللَّيْلَ وَالنَّهَارَ خِلْفَةً﴾</div>
+      <p data-i18n="footerDesc">تطبيق توقيت العالم الذكي — تصميم وتطوير شركة AnubisLand • يعمل بدقة المناطق الزمنية العالمية (IANA) وبوضع عدم الاتصال (PWA)</p>
+    </div>
+  </footer>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/cities-data.js"></script>
+  <script src="js/time-engine.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
