@@ -1,8 +1,8 @@
-const CACHE_NAME = 'anubisland-world-time-v2';
+const CACHE_NAME = 'anubisland-world-time-v3';
 const ASSETS = [
   './',
   './index.html',
-  './styles.css',
+  './styles.css?v=3',
   './manifest.json',
   './js/i18n.js',
   './js/cities-data.js',
@@ -35,21 +35,14 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      if (cached) return cached;
-      return fetch(event.request)
-        .then((response) => {
-          if (
-            response &&
-            response.status === 200 &&
-            response.type === 'basic'
-          ) {
-            const copy = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
-          }
-          return response;
-        })
-        .catch(() => caches.match('./index.html'));
-    })
+    fetch(event.request)
+      .then((response) => {
+        if (response && response.status === 200 && response.type === 'basic') {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+        }
+        return response;
+      })
+      .catch(() => caches.match(event.request).then((c) => c || caches.match('./index.html')))
   );
 });
