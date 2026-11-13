@@ -61,6 +61,7 @@ window.WORLD_CITIES = [
   { id: 'denver', nameAr: 'دنفر', nameEn: 'Denver', countryAr: 'الولايات المتحدة', countryEn: 'USA', tz: 'America/Denver', flag: '🇺🇸', theme: 'emerald' },
   { id: 'losangeles', nameAr: 'لوس أنجلوس', nameEn: 'Los Angeles', countryAr: 'الولايات المتحدة', countryEn: 'USA', tz: 'America/Los_Angeles', flag: '🇺🇸', theme: 'violet' },
   { id: 'sanfrancisco', nameAr: 'سان فرانسيسكو', nameEn: 'San Francisco', countryAr: 'الولايات المتحدة', countryEn: 'USA', tz: 'America/Los_Angeles', flag: '🇺🇸', theme: 'cyan' },
+  { id: 'santaclara', nameAr: 'سانتا كلارا (كاليفورنيا)', nameEn: 'Santa Clara, CA', countryAr: 'الولايات المتحدة', countryEn: 'USA', tz: 'America/Los_Angeles', flag: '🇺🇸', theme: 'teal' },
   { id: 'seattle', nameAr: 'سياتل', nameEn: 'Seattle', countryAr: 'الولايات المتحدة', countryEn: 'USA', tz: 'America/Los_Angeles', flag: '🇺🇸', theme: 'teal' },
   { id: 'honolulu', nameAr: 'هونولولو', nameEn: 'Honolulu', countryAr: 'الولايات المتحدة (هاواي)', countryEn: 'USA (Hawaii)', tz: 'Pacific/Honolulu', flag: '🇺🇸', theme: 'amber' },
   { id: 'toronto', nameAr: 'تورنتو', nameEn: 'Toronto', countryAr: 'كندا', countryEn: 'Canada', tz: 'America/Toronto', flag: '🇨🇦', theme: 'rose' },
@@ -112,5 +113,5 @@ window.CITY_PRESETS = {
   arab: ['riyadh', 'dubai', 'doha', 'amman', 'casablanca'],
   finance: ['london', 'newyork', 'tokyo', 'dubai', 'singapore', 'zurich'],
   tech: ['sanfrancisco', 'newyork', 'london', 'berlin', 'bangalore', 'tokyo'],
-  global: ['london', 'newyork', 'dubai', 'tokyo', 'sydney']
+  global: ['santaclara', 'london', 'newyork', 'dubai', 'tokyo', 'sydney']
 };
