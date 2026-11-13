@@ -1,4 +1,4 @@
-const CACHE_NAME = 'anubisland-world-time-v3';
+const CACHE_NAME = 'anubisland-world-time-v4';
 const ASSETS = [
   './',
   './index.html',

@@ -1,7 +1,18 @@
 (function () {
   'use strict';
 
-  const STORAGE_KEY = 'anubisland_world_time_state_v1';
+  const STORAGE_KEY = 'anubisland_world_time_state_v2';
+
+  function detectDeviceCityId() {
+    try {
+      const localTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      return window.TimeEngine.findCityByTimezone(localTz).id;
+    } catch {
+      return 'cairo';
+    }
+  }
+
+  const detectedRefId = detectDeviceCityId();
 
   const defaultState = {
     lang: 'ar',
@@ -11,8 +22,10 @@
     use24h: false,
     mode: 'live', // 'live' | 'custom'
     activeView: 'converter', // 'converter' | 'planner'
-    refCityId: 'cairo',
-    targetCityIds: ['riyadh', 'dubai', 'london', 'newyork', 'tokyo'],
+    refCityId: detectedRefId,
+    targetCityIds: ['cairo', 'riyadh', 'dubai', 'london', 'newyork', 'tokyo'].filter(
+      (id) => id !== detectedRefId
+    ),
     customUtcMs: Date.now()
   };
 

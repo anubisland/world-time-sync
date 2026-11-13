@@ -110,7 +110,7 @@ window.WORLD_CITIES = [
 ];
 
 window.CITY_PRESETS = {
-  arab: ['riyadh', 'dubai', 'doha', 'amman', 'casablanca'],
+  arab: ['cairo', 'riyadh', 'dubai', 'doha', 'amman', 'casablanca'],
   finance: ['london', 'newyork', 'tokyo', 'dubai', 'singapore', 'zurich'],
   tech: ['sanfrancisco', 'newyork', 'london', 'berlin', 'bangalore', 'tokyo'],
   global: ['santaclara', 'london', 'newyork', 'dubai', 'tokyo', 'sydney']
