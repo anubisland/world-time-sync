@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@500;700;800&family=Readex+Pro:wght@400;600;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=6" />
 </head>
 <body>
   <header class="top-header">
@@ -31,6 +31,7 @@
       <nav class="nav-pills" aria-label="Main Navigation">
         <button type="button" class="nav-pill active" data-view="converter" data-i18n="navConverter">محوّل التوقيت</button>
         <button type="button" class="nav-pill" data-view="planner" data-i18n="navPlanner">مخطط الاجتماعات (24 ساعة)</button>
+        <button type="button" class="nav-pill" data-view="about" data-i18n="navAbout">عن البرنامج</button>
       </nav>
 
       <div class="header-actions">
@@ -168,6 +169,79 @@
         <div class="matrix-scroll">
           <table class="matrix-table" id="plannerMatrixTable"></table>
         </div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: About App, Sources & Data Transparency -->
+    <section id="view-about" class="app-view hidden">
+      <div class="about-hero">
+        <div class="about-hero-badge" data-i18n="aboutBadge">🛡️ الشفافية، الدقة الفلكية، وخصوصية المستخدم</div>
+        <h2 data-i18n="aboutMainTitle">عن تطبيق توقيت العالم الذكي (World Time Sync)</h2>
+        <p data-i18n="aboutMainLead">
+          تطبيق ويب تقدمي (PWA) من تطوير شركة AnubisLand، صُمّم ليكون رفيقك الموثوق لتنسيق الوقت بين دول العالم بسهولة، وشفافية، ودون الحاجة للاتصال بالإنترنت.
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <article class="about-card">
+          <div class="about-card-head">
+            <span class="about-icon">🌍</span>
+            <h3 data-i18n="aboutImportanceTitle">ما هو البرنامج وأهميته؟</h3>
+          </div>
+          <p data-i18n="aboutImportanceDesc">
+            يعالج التطبيق مشكلة شائعة يواجهها المسافرون، وفرق العمل عن بُعد، والعائلات الممتدة عبر القارات: خطأ الحساب الذهني لفروق التوقيت أو نسيان تغيّر الساعة الصيفية أو انقلاب التاريخ بين الأمس والغد.
+          </p>
+          <ul class="about-list">
+            <li data-i18n="aboutImp1">تحديد الوقت المقابل في عدة مدن حول العالم فور إدخال الوقت في المدينة المرجعية.</li>
+            <li data-i18n="aboutImp2">كشف "الساعات الذهبية المشتركة" لعقد الاجتماعات والمكالمات دون إزعاج أي طرف في وقت نومه.</li>
+            <li data-i18n="aboutImp3">توفير شريط تمرير تفاعلي لـ 24 ساعة وتنبيه فوري عند تغيّر اليوم (أمس / نفس اليوم / غداً).</li>
+          </ul>
+        </article>
+
+        <article class="about-card">
+          <div class="about-card-head">
+            <span class="about-icon">🏛️</span>
+            <h3 data-i18n="aboutSourcesTitle">المصادر المعتمدة لحساب فروق التوقيت</h3>
+          </div>
+          <p data-i18n="aboutSourcesDesc">
+            لا يعتمد التطبيق على تخمينات أو جداول ثابتة يدوية؛ بل يستند مباشرةً إلى المرجع الزمني العالمي الرسمي المعتمد في أنظمة التشغيل والمتصفحات الحديثة:
+          </p>
+          <ul class="about-list">
+            <li data-i18n="aboutSrc1"><strong>قاعدة بيانات IANA العالمية (tzdata):</strong> المرجع الدولي المعتمد لدى هيئة أرقام الإنترنت المخصصة (IANA) لجميع المناطق الزمنية الرسمية للدول.</li>
+            <li data-i18n="aboutSrc2"><strong>محرك التوقيت القياسي (Intl.DateTimeFormat):</strong> الواجهة البرمجية المدمجة في المتصفح والتي تقرأ قواعد IANA بدقة متناهية.</li>
+            <li data-i18n="aboutSrc3"><strong>دعم التوقيت الصيفي (DST) والفروق الكسرية:</strong> يحسب تلقائياً انتقالات التوقيت الصيفي والشتوي لأي تاريخ، والفروق غير الصحيحة مثل الهند (+05:30) ونيبال (+05:45) وإيران (+03:30).</li>
+          </ul>
+        </article>
+
+        <article class="about-card">
+          <div class="about-card-head">
+            <span class="about-icon">⚙️</span>
+            <h3 data-i18n="aboutHowTitle">كيف يجلب البيانات ويحسب الفروق؟</h3>
+          </div>
+          <p data-i18n="aboutHowDesc">
+            عند اختيارك لمدينة مرجعية وتحديد وقت وتاريخ معين، يقوم المحرك الداخلي بالخطوات التالية في جزء من الثانية:
+          </p>
+          <ul class="about-list">
+            <li data-i18n="aboutHow1"><strong>1. التوحيد إلى UTC:</strong> يحوّل الوقت المُدخل في المدينة المرجعية إلى التوقيت العالمي المنسّق (UTC) بالاعتماد على قواعد IANA لتلك المدينة في ذلك التاريخ تحديداً.</li>
+            <li data-i18n="aboutHow2"><strong>2. الإسقاط على المدن المقارنة:</strong> يُسقط لحظة الـ UTC على المنطقة الزمنية الرسمية لكل مدينة مستهدفة لحساب الوقت والتاريخ واليوم بدقة.</li>
+            <li data-i18n="aboutHow3"><strong>3. حساب الفرق وحالة النهار:</strong> يطرح الإزاحة الزمنية لحساب الفرق بالساعات والدقائق، ويحدّد مرحلة النهار وحالة العمل أو النوم تلقائياً.</li>
+          </ul>
+        </article>
+
+        <article class="about-card">
+          <div class="about-card-head">
+            <span class="about-icon">🔒</span>
+            <h3 data-i18n="aboutPrivacyTitle">الخصوصية وأمان بياناتك</h3>
+          </div>
+          <p data-i18n="aboutPrivacyDesc">
+            صُمّم التطبيق ليكون آمناً تماماً ومريحاً للمستخدم دون أي تتبع أو استغلال للبيانات:
+          </p>
+          <ul class="about-list">
+            <li data-i18n="aboutPriv1"><strong>معالجة محلية 100%:</strong> جميع الحسابات تتم داخل جهازك مباشرةً ولا يتم إرسال أي بيانات أو مواعيد إلى خوادم خارجية.</li>
+            <li data-i18n="aboutPriv2"><strong>لا يستخدم GPS:</strong> عند استخدام ميزة "مدينة جهازي"، يقرأ التطبيق اسم المنطقة الزمنية لإعدادات النظام فقط دون طلب موقعك الجغرافي الدقيق.</li>
+            <li data-i18n="aboutPriv3"><strong>حفظ تفضيلاتك محلياً:</strong> تُحفظ المدن المختارة والمظهر واللغة في ذاكرة متصفحك فقط (localStorage)، ويعمل التطبيق بالكامل بدون إنترنت (PWA).</li>
+          </ul>
+        </article>
       </div>
     </section>
   </main>

@@ -83,8 +83,11 @@
     navPills: document.querySelectorAll('.nav-pill'),
     views: {
       converter: document.getElementById('view-converter'),
-      planner: document.getElementById('view-planner')
+      planner: document.getElementById('view-planner'),
+      about: document.getElementById('view-about')
     },
+    toolbarStrip: document.querySelector('.toolbar-strip'),
+    refHeroCard: document.querySelector('.ref-hero-card'),
     btnModeLive: document.getElementById('btnModeLive'),
     btnModeCustom: document.getElementById('btnModeCustom'),
     btnToggleFormat: document.getElementById('btnToggleFormat'),
@@ -160,8 +163,13 @@
       );
     });
     Object.entries(el.views).forEach(([key, section]) => {
-      section.classList.toggle('hidden', key !== state.activeView);
+      if (section) {
+        section.classList.toggle('hidden', key !== state.activeView);
+      }
     });
+    const isAbout = state.activeView === 'about';
+    if (el.toolbarStrip) el.toolbarStrip.classList.toggle('hidden', isAbout);
+    if (el.refHeroCard) el.refHeroCard.classList.toggle('hidden', isAbout);
   }
 
   function cityLabel(city) {

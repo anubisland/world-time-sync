@@ -1,8 +1,8 @@
-const CACHE_NAME = 'anubisland-world-time-v5';
+const CACHE_NAME = 'anubisland-world-time-v6';
 const ASSETS = [
   './',
   './index.html',
-  './styles.css?v=3',
+  './styles.css?v=6',
   './manifest.json',
   './js/i18n.js',
   './js/cities-data.js',

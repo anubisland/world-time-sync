@@ -884,6 +884,97 @@ body {
   font-weight: 600;
 }
 
+/* About App View */
+.about-hero {
+  background-color: #064e3b;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%23fbbf24' stroke-opacity='0.12' stroke-width='1.2'%3E%3Cpolygon points='48,6 60,36 90,48 60,60 48,90 36,60 6,48 36,36'/%3E%3Crect x='22' y='22' width='52' height='52'/%3E%3Crect x='22' y='22' width='52' height='52' transform='rotate(45 48 48)'/%3E%3C/g%3E%3C/svg%3E"),
+    linear-gradient(135deg, #04392b 0%, #064e3b 50%, #047857 100%);
+  border: 2px solid rgba(251, 191, 36, 0.45);
+  color: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 26px 24px;
+  margin: 20px 0 18px;
+  box-shadow: 0 10px 28px rgba(4, 57, 43, 0.35);
+}
+
+.about-hero-badge {
+  display: inline-block;
+  background: rgba(251, 191, 36, 0.18);
+  border: 1px solid rgba(251, 191, 36, 0.45);
+  color: #fde68a;
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+
+.about-hero h2 {
+  font-size: 1.55rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.about-hero p {
+  font-size: 0.96rem;
+  opacity: 0.92;
+  max-width: 780px;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.about-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-top: 4px solid var(--accent);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.about-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.about-icon {
+  font-size: 1.65rem;
+  line-height: 1;
+}
+
+.about-card h3 {
+  font-size: 1.08rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.about-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.about-list {
+  padding-inline-start: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.about-list li {
+  font-size: 0.88rem;
+  color: var(--text-main);
+  font-weight: 600;
+}
+
 @media (max-width: 640px) {
   .ref-clock-big {
     font-size: 2.2rem;
